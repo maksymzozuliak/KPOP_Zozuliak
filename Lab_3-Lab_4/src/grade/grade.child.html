@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<ul>
+    <li *ngFor="let grade of _grades; let i = index">
+        {{ i + 1 }}. {{ grade.name }} {{ grade.grade }}
+    </li>
+</ul>
+<p>Average Grade: {{ avg }}</p>
+</html>

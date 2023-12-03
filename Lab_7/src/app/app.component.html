@@ -1,0 +1,93 @@
+<h1 style="text-align: center;">Форма заявки на роботу в зоопарку</h1>
+<div style="display: flex; justify-content: center;">
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <!-- Контактна інформація -->
+  <fieldset>
+    <legend>Контактна інформація</legend>
+    <label id="ds" for="name">Ім'я:</label>
+    <span class="required-field">*</span>
+    <input type="text" id="name" name="name" formControlName="name" required>
+    <br>
+    <div id="name-error" class="error-message" *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">
+      Ім'я є обов'язковим полем.
+    </div>
+
+    <label for="phone">Телефон:</label>
+    <input type="tel" id="phone" name="phone" formControlName="phone" pattern="[0-9+()-\s]+" required><br>
+    <div id="phone-error" class="error-message" *ngIf="form.get('phone')?.hasError('invalidPhone') && form.get('phone')?.value !== ''">
+      Неправильний номер.
+    </div>
+
+    <label for="email">Email:</label>
+    <span class="required-field">*</span>
+    <input type="email" id="email" name="email" formControlName="email" required><br>
+    <br>
+    <div id="email1-error" class="error-message" *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched">
+      Email є обов'язковим полем.
+    </div>
+    <div id="email2-error" class="error-message" *ngIf="form.get('email')?.hasError('email') && form.get('email')?.value !== ''">
+      Неправильний email.
+    </div>
+  </fieldset>
+
+  <!-- Персональна інформація -->
+  <fieldset>
+    <legend>Персональна інформація</legend>
+    <label for="age">Вік:</label>
+    <span class="required-field">*</span>
+    <input type="number" id="age" name="age" formControlName="age" pattern="[0-9]+"><br>
+    <div id="age1-error" class="error-message" *ngIf="form.get('age')?.hasError('required') && form.get('age')?.touched">
+      Вік є обов'язковим полем.
+    </div>
+    <div id="age2-error" class="error-message" *ngIf="(form.get('age')?.hasError('min') || form.get('age')?.hasError('max')) && form.get('age')?.value !== ''">
+      Вік має бути від 1 до 110.
+    </div>
+
+    <label for="gender">Стать:</label>
+    <select id="gender" name="gender" formControlName="gender">
+      <option value="female">Жінка</option>
+      <option value="male">Чоловік</option>
+    </select><br>
+
+    <label for="personalInfo">Перелік особистих даних:</label><br>
+    <textarea id="personalInfo" name="personalInfo" formControlName="personalInfo" rows="4" cols="50"></textarea><br>
+    <div id="personalInfo-error" class="error-message" *ngIf="form.get('personalInfo')?.hasError('minLength') && form.get('personalInfo')?.value !== ''">
+      Мінімум 20 символів.
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Оберіть ваші улюблені тварини</legend>
+
+    <input type="checkbox" id="zebra" name="animals[]" value="Зебра" (change)="toggleAnimal('Зебра')">
+    <label for="zebra">Зебра</label><br>
+
+    <input type="checkbox" id="cat" name="animals[]" value="Кіт" (change)="toggleAnimal('Кіт')">
+    <label for="cat">Кіт</label><br>
+
+    <input type="checkbox" id="anaconda" name="animals[]" value="Анаконда" (change)="toggleAnimal('Анаконда')">
+    <label for="anaconda">Анаконда</label><br>
+
+    <input type="checkbox" id="human" name="animals[]" value="Людина" (change)="toggleAnimal('Людина')">
+    <label for="human">Людина</label><br>
+
+    <input type="checkbox" id="elephant" name="animals[]" value="Слон" (change)="toggleAnimal('Слон')">
+    <label for="elephant">Слон</label><br>
+
+    <input type="checkbox" id="antelope" name="animals[]" value="Антилопа" (change)="toggleAnimal('Антилопа')">
+    <label for="antelope">Антилопа</label><br>
+
+    <input type="checkbox" id="pigeon" name="animals[]" value="Голуб" (change)="toggleAnimal('Голуб')">
+    <label for="pigeon">Голуб</label><br>
+    <div id="golub-error" class="error-message" *ngIf="findGolub()">
+      Неправда, ніхто не любить голубів.
+    </div>
+
+    <input type="checkbox" id="crab" name="animals[]" value="Краб" (change)="toggleAnimal('Краб')">
+    <label for="crab">Краб</label><br>
+
+  </fieldset>
+
+  <input type="submit" value="Відправити інформацію">
+</form>
+</div>

@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<label>Введіть ім’я:</label>
+<input [(ngModel)]="newName" placeholder="name">
+<label>Введіть оцінку:</label>
+<input [(ngModel)]="newGrade" placeholder="grade" type="number">
+<button (click)="addGrade()">Додати оцінку</button>
+<child-comp [grades]="grades"></child-comp>
+</html>
